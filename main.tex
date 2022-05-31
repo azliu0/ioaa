@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{mathtools, amssymb, amsthm, empheq, xfrac, asymptote, hyperref, graphicx, enumitem}
+\usepackage[dvipsnames]{xcolor}
+
+\hypersetup{
+    colorlinks=true, 
+    linktoc=all,    
+    linkcolor=blue, 
+    urlcolor=blue
+}
+
+% commands
+\newcommand{\V}{
+
+\vspace{\baselineskip}
+
+}
+\newcommand{\comment}[1]{\textbf{\textcolor{Red}{#1}}}
+\newcommand{\image}[1]{
+\begin{center}
+    \includegraphics[width=9cm]{#1}
+\end{center}
+
+}
+
+% \setlength{\parindent}{0cm}
+
+\title{\huge {\fontfamily{lmss}\selectfont
+\textbf{IOAA Notes}}}
+% \author{{\fontfamily{cmr}\selectfont
+% {Andrew Liu}}}
+\author{\scshape \Large Andrew Liu}
+\date{{\fontfamily{cmr}\selectfont August 2022}}
+
+\begin{document}
+
+\maketitle
+
+\section{Spherical Trig}
+
+\textit{Readings: Roy and Clarke Chapter 9, Kartunnen Chapter 2 \\(the carroll ostlie chapter is honestly not very good)}
+
+\subsection{Triangle Formulas}
+
+\image{images/triangle.png}
+
+Area: 
+\begin{align*}
+    E = A + B + C - \pi \\
+    \text{Area} = E\cdot r^2
+\end{align*}
+
+Spherical law of sines: 
+\begin{equation*}
+    \frac{\sin{a}}{\sin{A}} = \frac{\sin{b}}{\sin{B}} =\frac{\sin{c}}{\sin{C}}
+\end{equation*}
+
+Spherical law of cosines: 
+\begin{equation*}
+    \cos{a} = \cos{A}\sin{b}\sin{c}+\cos{b}\cos{c}
+\end{equation*}
+\begin{equation*}
+    \cos{A} = \cos{a}\sin{B}\sin{C}-\cos{B}\cos{C}
+\end{equation*}
+
+Spherical law of cosines (alternate): 
+\begin{equation*}
+    \cos{B}\sin{a} = -\cos{A}\sin{b}\cos{c}+\cos{b}\sin{c}
+\end{equation*}
+
+Four parts formula: 
+\begin{equation*}
+    \cos{a}\cos{C} = \sin{a}\cot{b} - \sin{C}\cot{B}
+\end{equation*}
+\begin{equation*}
+    \cos{A}\cos{c} = \sin{A}\cot{B} - \sin{c}\cot{b}
+\end{equation*}
+
+\subsection{Coordinate Systems}
+
+\image{images/rah.png}
+\image{images/conversion.png}
+
+Equatorial: (Right Ascension, Declination) = $(\alpha, \delta)$
+
+Horizontal: (Azimuth, Altitude) = $(A, a)$
+
+Ecliptic: (Longitude, Latitude) = $(\lambda, \beta)$
+
+Local Sidereal Time = $\Theta = h + \alpha$. (AKA hour angle of $\Upsilon$)
+
+\begin{itemize}
+\item Azimuth $A$ measured clockwise from either the northernmost or southernmost point on observor's horizon (usually whichever is more convenient, but stick to one notation to be consistent). 
+
+\item RA $\alpha$ measured counterclockwise from the vernal equinox ($\Upsilon$)
+
+\item Longitude $\lambda$ measured counterclockwise from the vernal equinox ($\Upsilon$)
+
+\item Hour angle $h$ measured clockwise from the southern meridian. Measures the time that has elapsed after an object has culminated (in the northern hemisphere).
+\end{itemize}
+
+\subsection{Timekeeping}
+
+\textbf{Solar vs. Sidereal:} $T$ = Local Solar Time (acronym LST not to be confused with $\Theta$ = Local Sidereal Time). $\texttt{12:00}$ local solar time corresponds to the time when the sun culminates for a particular location. On March 20th, the sun aligns with the vernal equinox and thus culminates at the same time as the vernal equinox, meaning that $T = \texttt{12:00}$ and $\Theta = \texttt{0:00}$ align on this date.
+
+Every solar day takes $24$ hours; the time between consecutive culminations of the sun takes $24$ hours. Every sidereal day takes $23$ hours $56$ minutes $4$ seconds; for any background star, the time between consecutive culminations takes $23$ hours $56$ minutes $4$ seconds. The exact conversion is 
+\begin{gather*}
+    24\text{ sidereal hours} = 24\cdot \left(\frac{365.25}{366.25}\right)\text{ solar hours} \\
+    24\text{ solar hours} = 24\cdot \left(\frac{366.25}{365.25}\right)\text{ sidereal hours}. 
+\end{gather*}
+To derive this, consider that sidereal time accounts for one additional rotation of the entire earth's orbit around the sun per year, so it necessary runs faster, i.e., a sidereal hour is less than a solar hour, and any time period measured in solar time will be numerically smaller than any period measured in sidereal time.\V
+
+To compute solar to sidereal times at specific dates, approximate 
+\[
+\Theta = \begin{cases}
+    T + 12\text{ hr} & \text{Vernal Equinox} \\
+    T + 18\text{ hr} & \text{Summer Solstice} \\
+    T + 0\text{ hr} & \text{Autumnal Equinox} \\
+    T + 12\text{ hr} & \text{Winter Solstice}. 
+\end{cases}
+\]
+
+Then, for example, if you want to compute sidereal time on March $31$st, this corresponds to a period of $10$ solar days that passed, which is equal to $10\cdot (366.25/365.25)$ sidereal days that passed. The difference is about $40$ minutes, as we expect, since a solar day is about $4$ minutes longer than a sidereal day (in solar time). So, on March $31$st, we have $\Theta \approx T + 12\text{ hr} + 40\text{ min}$.\V
+
+\textbf{Zero Meridian:} Greenwich, London is the $0^{\circ}$ meridian. Greenwich Mean Time (GMT), also called Universal Time (UT) is the local solar time in Greenwich and is used as the "universal" time. Greenwich Mean Sidereal Time (GMST) is the hour angle of $\Upsilon$ ignoring the effects of nutational variation (since it is measured against the background stars). Greenwich Apparent Sidireal Time (GAST) is the actual position of $\Upsilon$. Equation of the Equinoxes: 
+
+\begin{equation*}
+    \mathcal{E}_{\Upsilon} = \text{GAST} - \text{GMST}.
+\end{equation*}
+
+Convert between Greenwich and any other location with longitude $\lambda$ with: 
+
+\begin{equation*}
+    GHA\star = HA\star + \lambda,
+\end{equation*}
+where west $\lambda$ is positive and east $\lambda$ is negative, so that "Longitude east, Greenwich least; Longitude west, Greenwich best".\V
+
+\textbf{Equation of Time ($\mathcal{E}$):} The mean sun (MS) is a fictitious sun that moves along the celestial equator at the rate of $(360^{\circ})/365.25\text{ days}$. The true sun ($\odot$) moves along the ecliptic at the same rate. We introduce MS for timekeeping, since the true sun does not technically have a constant angular velocity (eccentricity of orbit) and also suffers from the $23.5^{\circ}$ obliquity. Now, equation of Time ($\mathcal{E}$):
+
+\[\mathcal{E} = \text{RAMS} - \text{RA}\odot\]
+
+(Note that this is backwards from the Equation of the Equinoxes). Some other notes on the equation of time that are important to remember (from that one Singapore problem): 
+\begin{enumerate}
+    \item The equation of time can also be written as $\mathcal{E} = \text{HA}\odot - \text{HAMS}$. 
+    \item Recall that timekeeping is based on the mean sun. So, whenever the equation of time is not equal to zero, $HA\odot = 0$ does not necessarily correspond to local solar time $LST = 12^{h}$.
+    \item Instead, use this: $LST = HAMS \pm 12^{h} = HA\odot - \mathcal{E} \pm 12^{h}$. In particular, this is one reason why the rising time will become earlier between the vernal and summer solstice, since the equation of time becomes more and more positive. At the summer solstice, the equation of time is equal to zero, so the only reason why the sun still rises earlier at this stage is due to the fact that the sun's declination is $23.5^{\circ}$.
+\end{enumerate}
+
+
+\V
+
+
+
+
+\textbf{Analemma}: plot with equation of time on the horizontal axis and declination on the vertical axis. See this link for a nice visual of the projection of an Analemma: \href{https://medium.com/sentinel-hub/the-shadow-of-a-celestial-dance-90968f1f42fb}{https://medium.com/sentinel-hub/the-shadow-of-a-celestial-dance-90968f1f42fb}\V
+
+\textbf{Time Zones:} 
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+zone & longitude \\
+\hline\hline
+$\pm 0$ (UTC$\pm$0) & $0^{h}30^{m}\text{W}$—$0^{h}30^{m}\text{E}$  \\
+\hline
++1 (UTC-1) & $1^{h}30^{m}\text{W}$—$0^{h}30^{m}\text{W}$  \\
+\hline
++2 (UTC-2) & $2^{h}30^{m}\text{W}$—$1^{h}30^{m}\text{W}$  \\
+\hline
+   \vdots  &\vdots  \\
+\hline
++12 (UTC-12) & $12^{h}\text{W}$—$11^{h}30^{m}\text{W}$  \\
+\hline
+\end{tabular}
+\begin{tabular}{|c|c|}
+\hline
+zone & longitude \\
+\hline\hline
+&  \\
+\hline
+-1 (UTC+1) & $1^{h}30^{m}\text{E}$—$0^{h}30^{m}\text{E}$  \\
+\hline
+-2 (UTC+2) & $2^{h}30^{m}\text{E}$—$1^{h}30^{m}\text{E}$  \\
+\hline
+   \vdots  &\vdots  \\
+\hline
+-12 (UTC+12) & $12^{h}\text{E}$—$11^{h}30^{m}\text{E}$  \\
+\hline
+\end{tabular}
+\end{center}
+
+% Zone $0$ is $0^{h}30^{m}W$—$0^{h}30^{m}E$. 
+
+% Zone $+1$ (UTC-1) is $1^{h}30^{m}W$—$0^{h}30^{m}W$. Zone $+2$ (UTC-2) is $2^{h}30^{m}W$—$1^{h}30^{m}W$ ... Zone $+12$ (UTC-12) is $12^{h}W$—$11^{h}30^{m}W$.
+
+% Zone $-1$ (UTC+1) is $1^{h}30^{m}E$—$0^{h}30^{m}E$. Zone $-2$ (UTC+2) is $2^{h}30^{m}E$—$1^{h}30^{m}E$ ... Zone $-12$ (UTC+12) is $12^{h}E$—$11^{h}30^{m}E$.
+
+The international date line is defined by $12^{h}\text{ E/W}$. If you're travelling from east to west (in the direction from China to America) across the international date line, then you're moving from Zone $-12$ (UTC+12) to Zone $+12$ (UTC-12). To change times from Zone $-12$ to UTC, you subtract $12$ hours; to change times from UTC to Zone $+12$, you subtract $12$ hours again. In total, you lose $24$ hours. If you're travelling from west to east, you gain $24$ hours.
+
+\section{Cosmology}
+
+\textit{Readings: Carroll Ostlie Chapter 29}\V
+
+\textbf{Cosmological Principle}: the assumption that the expanding universe is both isotropic and homogenous.
+
+\textbf{Hubble's Law:} 
+\begin{equation*}
+    v = H_0r.
+\end{equation*}
+$v$ is recessional velocity. $H_0$ is Hubble's constant. $r$ is distance.
+
+\textbf{Co-moving coordinate:}
+\begin{equation*}
+    r(t) = R(t)\cdot \varpi
+\end{equation*}
+$r(t)$ is the coordinate distance from the observer, $R(t)$ is the scale factor, and $\varpi$ is the \textit{co-moving coordinate}.
+
+\textbf{Deriving Friedmann:}
+
+\begin{center}
+\begin{asy}
+import graph; size(4cm); 
+pen dps = linewidth(0.7) + fontsize(10); defaultpen(dps); /* default pen style */ 
+pen dotstyle = black; /* point style */ 
+
+draw(circle((0,0), 5), black);
+draw(circle((0,0), 4.5), black);
+fill(circle((0,0), 5), black+opacity(0.2));
+fill(circle((0,0), 4.45), white);
+
+draw((0,0));
+draw((0,0)--4.5*dir(40), black, Arrow(5));
+
+label("$r$", (0,0)--4.5*dir(40), dir(-50));
+\end{asy}
+\end{center}
+\end{document}
