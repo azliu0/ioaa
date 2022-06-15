@@ -98,6 +98,8 @@ Horizontal: (Azimuth, Altitude) = $(A, a)$
 
 Ecliptic: (Longitude, Latitude) = $(\lambda, \beta)$
 
+Galactic: (Longitude, Latitude) = $(\ell, b)$. 
+
 Local Sidereal Time = $\Theta = h + \alpha$. (AKA hour angle of $\Upsilon$)
 
 \begin{itemize}
@@ -106,6 +108,8 @@ Local Sidereal Time = $\Theta = h + \alpha$. (AKA hour angle of $\Upsilon$)
 \item RA $\alpha$ measured counterclockwise from the vernal equinox ($\Upsilon$)
 
 \item Longitude $\lambda$ measured counterclockwise from the vernal equinox ($\Upsilon$)
+
+\item Galactic coordinates centered at the sun. Longitude $\ell$ is measured counterclockwise from the ray $\overrightarrow{\odot GC}$, where GC is the galactic center.
 
 \item Hour angle $h$ measured clockwise from the southern meridian. Measures the time that has elapsed after an object has culminated (in the northern hemisphere).
 \end{itemize}
@@ -154,7 +158,7 @@ where west $\lambda$ is positive and east $\lambda$ is negative, so that "Longit
 \begin{enumerate}
     \item The equation of time can also be written as $\mathcal{E} = \text{HA}\odot - \text{HAMS}$. 
     \item Recall that timekeeping is based on the mean sun. So, whenever the equation of time is not equal to zero, $HA\odot = 0$ does not necessarily correspond to local solar time $LST = 12^{h}$.
-    \item Instead, use this: $LST = HAMS \pm 12^{h} = HA\odot - \mathcal{E} \pm 12^{h}$. In particular, this is one reason why the rising time will become earlier between the vernal and summer solstice, since the equation of time becomes more and more positive. At the summer solstice, the equation of time is equal to zero, so the only reason why the sun still rises earlier at this stage is due to the fact that the sun's declination is $23.5^{\circ}$.
+    \item Instead, use this: $LST = HAMS \pm 12^{h} = HA\odot - \mathcal{E} \pm 12^{h}$. This is one reason why the rising time will become earlier between the vernal equinox and summer solstice, since the equation of time becomes more and more positive (for fixed hour angle, the LST is lesser). At the summer solstice, the equation of time is equal to zero, so the only reason why the sun still rises earlier at this stage is due to the fact that the sun's declination is $23.5^{\circ}$.
 \end{enumerate}
 
 
@@ -285,7 +289,7 @@ which is also equivalent to
 
 $\rho = \rho_{m} + \rho_{rel} + \rho_{\Lambda}$ accounts for matter (dark + baryonic = protons, neutrons), relativistic particles (photons and neutrinos), and dark energy. Relativistic density and dark energy density are taken as equivalent mass densities; that is, we let 
 \[\rho_{rel} = \frac{u_{rel}}{c^{2}} = \frac{g^{*}aT^{4}}{2c^{2}} = \frac{2g^{*}\sigma T^{4}}{c^{3}},\]
-where $u_{rel}$ is the energy density of relativistic particles, both photons and neutrinos. This differs from the normal energy density of blackbody radiation ($u=aT^{4}$, which only accounts for photons) by a factor of $g^{*}/2\approx 1.68$. $g^{*}$ itself is the ``effective number of degrees of freedom for relativistic particles''. We also let 
+where $u_{rel}$ is the energy density of relativistic particles, both photons and neutrinos. This differs from the normal energy density of blackbody radiation ($u=aT^{4}$, which only accounts for photons) by a factor of $g^{*}/2\approx 1.68$. $g^{*}$ itself is the ``effective number of degrees of freedom for relativistic particles''. Knowing what this means isn't super important but the $1.68$ figure has shown up before so just know that it exists. We also let 
 \[\rho_{\Lambda} = \frac{\Lambda c^{2}}{8\pi G},\]
 so that the Friedmann equation looks consistent ($8/3\pi G(\rho_{m}+\rho_{rel}) + 1/3\Lambda c^{2}$) when fully expanded.\V
 
@@ -335,7 +339,7 @@ Try to remember approximately what the current density parameter values are:
 \end{cases}
 \]
 
-(the current universe is dominated by dark energy, and relativistic particles are almost negligible so that $P/c^{2} << \rho$).\V
+(the current universe is dominated by dark energy, and relativistic particles are almost negligible so that $P/c^{2} << \rho$). $\Omega_{m,0}$ can be further broken down into the dark matter density parameter (roughly 0.22) and the baryonic matter density parameter (roughly 0.04). \V
 
 Some very useful reformulations of the friedmann equation: 
 
@@ -351,12 +355,86 @@ where $\Omega = \Omega_{m} + \Omega_{rel} + \Omega_{\Lambda}$. Also equivalent t
 \item co-moving distance ($\varpi$): equal to current proper distance $d_{p,0}$. this definition is somewhat tautological but just accept it for now.
 \item proper distance $(d_{p})$: distance between two events that occur simultaneously. In a flat universe, the proper distance is just equal to the coordinate distance, i.e., $d_{p} = \varpi/(1+z)$.
 \item horizon distance $(d_{h})$: proper distance to the farthest observable point in the universe (the particle horizon).
-\item luminosity distance $(d_{L})$: measured flux $F = L/(4\pi d_{L}^{2}) = L/(4\pi \varpi^{2} (1+z)^{2})$, so $d_{L} = \varpi (1+z)$.
+\item luminosity distance $(d_{L})$: measured flux $F = L/(4\pi d_{L}^{2}) = L/(4\pi \varpi^{2} (1+z)^{2})$, so $d_{L} = \varpi (1+z)$. Oftentimes solve for luminosity distance using distance modulus (i.e. given apparent and absolute magnitude) and need to convert to proper distance *at the present time* using $d_L = \varpi (1+z) = d_{p,0} (1+z)$. 
 \item angular distance $(d_{A})$: $d_{A} = D/\theta = \varpi/(1+z)$.
 \end{itemize}
 
 Example calculation of $\varpi$, $d_{p}$, and $d_{h}$ for a flat, one-component universe of pressureless dust: 
 
 \image[2]{images/varpi-1.png}{6}{images/varpi-2.png}{6}
+
+\section{Magnitude Stuff}
+
+\textbf{Surface Brightness:}
+
+SB is a measure of flux density per unit solid angle. Typically given in units of mag/arcsec$^2$ (MPSAS -- magnitudes per square arcseconds). Given SB = $\mu$, and an object with area $A$ in units of arcsec$^2$, its apparent magnitude $m$ is given by:
+\[m - \mu = -2.5\log{A}.\]
+Intuitively, $\mu$ is the magnitude of the object when $A = 1\text{arcsec}^2$, so the "$\log{A}$" term just represents the ratio of fluxes in an object with area $A$. Recall that flux is equal to the amount of energy (from photons) collected per unit area of a detector on earth -- the amount of energy collected is proportional to the area of the sky that the object takes up.
+
+Surface brightness is invariant of distance! Flux density and the solid angle both drop off with distance squared ($\omega = A/r^2$).
+
+\textbf{Terms:}
+
+\begin{itemize}
+\item \textbf{Itensity} ($I$): measured in watts per meters squared per unit steradian. This refers to \textit{total intensity}; sometimes, monochromatic intensity $I_\nu$ is used, which is in units of watts per meters squared per unit steradian per hertz. Formally, $dE = I_{\nu} dA d\nu d\omega dt$. 
+\item \textbf{Flux} ($F$): (technically Flux Density) measured in watts per units squared, this is typically used to represent the amount of energy per unit time from some blackbody that passes through some surface $S$. Formally, $F = \int_S \frac{dE}{dt dA} = \int_S I\cos_{\theta}d\omega$. (the monochromatic version of this integral, i.e. having an additional factor $d\nu$ in the denominator of the first expression, also holds).
+\item \textbf{Luminosity} ($L$): measured in watts. 
+\item \textbf{Energy Density of Radiation} ($u$): measured in J/m$^3$.
+\item \textbf{Surface Brightness} ($S$): see above.
+\end{itemize}
+
+\textbf{Formulae:}
+
+\image{images/intensity.png}{9}{}{}
+
+The image above depicts a monochromatic intensity (notated as $B_{\lambda}(T)$; we use the $B$ notation to denote the planck function, but $I$ for any general intensity) radiated from a blackbody with temperature $T$, passing through a sheet $dA$. Integrating over each solid angle element $d\omega$, and noting that we only care about the "vertical" perpendicular component (so multiply by $\cos\theta$), we get that, for isotropic radiation:
+
+\begin{align*}
+F &= \int_S I\cos{\theta}d\omega \\
+&= I \int_{0}^{\pi/2}\int_{0}^{2\pi}\cos{\theta}\sin{\theta}\mathrm{d}\phi \mathrm{d}\theta \\
+&= 2\pi I\int_{0}^{\pi / 2}1/2\cdot \sin{2\theta}\mathrm{d}\theta \\
+&= \pi I.
+\end{align*}
+
+Planck functions:
+
+\[B_{\lambda}(T) = \frac{2hc^2/\lambda^5}{e^{hc/\lambda kT} - 1}.\]
+\[B_{\nu}(T) = \frac{2h\nu^3/c^2}{e^{h\nu/kT} - 1}.\]
+
+Total intensity:
+\[I = \int_0^{\infty} B_{\lambda}(T)\mathrm{d}\lambda =  \int_0^{\infty} B_{\nu}(T)\mathrm{d}\nu = F/\pi.\]
+
+Actually performing this integral yields:
+
+\[F = \left(\frac{2\pi^5 k^4}{15c^2 h^3}\right)T^4 = \sigma T^4.\]
+
+Deriving energy density:
+\[dE = IdAd\omega dt = I\cdot \frac{1}{c}d\omega dV \implies u = \int \frac{dE}{dV} = 4\pi/c \cdot I.\]
+
+Useful chain of things to remember:
+\[u = \frac{4\pi}{c}I =  \frac{4}{c}F = \frac{4\sigma}{c}T^4 = aT^4.\]
+
+\section{Celestial Mechanics}
+
+\[\mu = \frac{m_1m_2}{m_1 + m_2}\]
+\[r_1 = \frac{\mu}{m_1}r, r_2 = \frac{\mu}{m_2}r, v_1 = \frac{\mu}{m_1}v, v_2 = \frac{\mu}{m_2}v.\]
+(all $r$s and $v$s are vectors).
+
+\[E = \frac{1}{2}\mu v^2 - G\frac{M\mu}{r}.\]
+\[L = \mu r\times v = r\times p = \mu\sqrt{GMa(1-e^2)}.\]
+\[v_p = \sqrt{\frac{GM(1+e)}{a(1-e)}}, v_a = \sqrt{\frac{GM(1-e)}{a(1+e)}}.\]
+\[dA = \frac{1}{2}(r\times dr) = \frac{1}{2}(r\times vdt) = \frac{L}{2\mu}dt.\]
+\[dA = \frac{1}{2}r^2d\theta.\]
+\[dL/dt = (dr/dt\times p) + (r\times dp/dt) = v\times \mu v + r\times F = 0.\]
+
+polar form of orbit equation:
+\[r = \frac{p}{1 + e\cos{\theta}}.\]
+
+Circle: $p = r$ (constant radius), $e = 0$. 
+Ellipse: $p = b^2/a = a(1-e^2)$, $0 < e < 1$. \\
+Parabola: $p = r_p$ (perihelion distance), $e=1$. \\
+Hyperbola: $p = b^2/a = a(e^2-1)$, $e > 1$. 
+
+
 
 \end{document}
