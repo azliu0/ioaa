@@ -1,9 +1,10 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{mathtools, amssymb, amsthm, empheq, xfrac, asymptote, hyperref, graphicx, enumitem}
+\usepackage{bm}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{ifthen}
 
@@ -21,18 +22,18 @@
 
 }
 \newcommand{\comment}[1]{\textbf{\textcolor{Red}{#1}}}
-\newcommand{\image}[5][1]{
-\ifnum #1=1 
-    \begin{center}
-        \includegraphics[width=#3cm]{#2}
-    \end{center}
-\else
-    \begin{center}
-        \includegraphics[width=#3cm]{#2}
-        \includegraphics[width=#5cm]{#4}
-    \end{center}
-\fi
-}
+% \newcommand{\image}[5][1]{
+% \ifnum #1=1 
+%     \begin{center}
+%         \includegraphics[width=#3cm]{#2}
+%     \end{center}
+% \else
+%     \begin{center}
+%         \includegraphics[width=#3cm]{#2}
+%         \includegraphics[width=#5cm]{#4}
+%     \end{center}
+% \fi
+% }
 
 % \setlength{\parindent}{0cm}
 
@@ -49,11 +50,14 @@
 
 \section{Spherical Trig}
 
-\textit{Readings: Roy and Clarke Chapter 9, Kartunnen Chapter 2 \\(the carroll ostlie chapter is honestly not very good)}
+\textit{References: Roy and Clarke Chapter 9, Kartunnen Chapter 2, Carroll Ostlie Chapter 1}
 
 \subsection{Triangle Formulas}
 
-\image{images/triangle.png}{9}{}{}
+\begin{center}
+\includegraphics[width=9cm]{images/triangle.png}
+\end{center}
+% \image{images/triangle.png}{9}{}{}
 
 Area:
 \begin{align*}
@@ -89,7 +93,12 @@ Four parts formula:
 
 \subsection{Coordinate Systems}
 
-\image[2]{images/rah.png}{7.5}{images/conversion.png}{7.5}
+% \image[2]{images/rah.png}{7.5}{images/conversion.png}{7.5}
+
+\begin{center}
+\includegraphics[width=7.5cm]{images/rah.png}
+\includegraphics[width=7.5cm]{images/conversion.png}
+\end{center}
 %\image{images/conversion.png}
 
 Equatorial: (Right Ascension, Declination) = $(\alpha, \delta)$
@@ -212,9 +221,10 @@ zone & longitude \\
 
 The international date line is defined by $12^{h}\text{ E/W}$. If you're travelling from east to west (in the direction from China to America) across the international date line, then you're moving from Zone $-12$ (UTC+12) to Zone $+12$ (UTC-12). To change times from Zone $-12$ to UTC, you subtract $12$ hours; to change times from UTC to Zone $+12$, you subtract $12$ hours again. In total, you lose $24$ hours. If you're travelling from west to east, you gain $24$ hours.
 
+\newpage
 \section{Cosmology}
 
-\textit{Readings: Carroll Ostlie Chapter 29}\V
+\textit{References: Carroll Ostlie Chapter 29}\V
 
 \textbf{Cosmological Principle}: the assumption that the expanding universe is both isotropic and homogenous.\V
 
@@ -361,9 +371,26 @@ where $\Omega = \Omega_{m} + \Omega_{rel} + \Omega_{\Lambda}$. Also equivalent t
 
 Example calculation of $\varpi$, $d_{p}$, and $d_{h}$ for a flat, one-component universe of pressureless dust: 
 
-\image[2]{images/varpi-1.png}{6}{images/varpi-2.png}{6}
+\begin{center}
+\includegraphics[width=6cm]{images/varpi-1.png}
+\includegraphics[width=6cm]{images/varpi-2.png}
+\end{center}
+% \image[2]{images/varpi-1.png}{6}{images/varpi-2.png}{6}
 
-\section{Magnitude Stuff}
+\newpage
+\section{Radio Astronomy}
+
+\textit{References: Carroll Ostlie Chapters 3 and 9, Karttunen Chapter 4}\newline
+\url{https://lweb.cfa.harvard.edu/~eprice/files/notes00.pdf}
+
+\subsection{Terms:}
+\begin{itemize}
+\item \textbf{Itensity} ($I$): measured in $Wm^{-2}\text{ Sterad}^{-1}$. This refers to total intensity. Monochromatic intensity (specific intensity) $I_\nu$ has units of $Wm^{-2}\text{ Sterad}^{-1}Hz^{-1}$, and is formally defined as follows: $E_{\nu}d\nu = I_{\nu} d\nu dA d\Omega dt$ (the quantity $E_{\nu}d\nu$ is the amount of energy that exists between the frequencies $\nu$ and $\nu + d\nu$). $I = \int I_{\nu}d\nu$.
+\item \textbf{Flux} ($F$): (technically Flux Density) measured in $Wm^{-2}$, is the amount of energy per unit time from a radiation source that passes through some unit surface $S$. Alternatively, this can be thought of as the integral of Intensity through some solid angle. Monochromatic flux density (specific radiative flux), has units $Wm^{-2}Hz^{-1}$ (=$10^{26}$ Janskys) can be expressed as follows: $F_{\nu} d\nu = \int_S \frac{E_{\nu}d\nu}{dt dA} = \int_S I_{\nu}d\nu \cos{\theta} d\Omega$. $F = \int F_{\nu}d\nu$, which is also equal to $\int_S I\cos{\theta}d\Omega$ so long as the intensity is received uniformly through all wavelengths (unrealistic).
+\item \textbf{Luminosity} ($L$): measured in $W$, this quantity represents the total energy per unit time emitted through some surface area $A$ and solid angle. This can also be thought of as the integral of Flux density through an entire receiving surface area. Monochromatic luminosity (specific luminosity) has units of $WHz^{-1}$ and is expressed as follows: $L_{\nu}d\nu = \int_A F_{\nu}d\nu$. Then, $L = \int L_{\nu}d\nu$.
+\item \textbf{Energy Density of Radiation} ($u$): Measured in J/m$^3$. See below for derivation of the formula.
+\item \textbf{Surface Brightness} ($\mu$): See below.
+\end{itemize}
 
 \textbf{Surface Brightness:}
 
@@ -371,69 +398,179 @@ SB is a measure of flux density per unit solid angle. Typically given in units o
 \[m - \mu = -2.5\log{A}.\]
 Intuitively, $\mu$ is the magnitude of the object when $A = 1\text{arcsec}^2$, so the "$\log{A}$" term just represents the ratio of fluxes in an object with area $A$. Recall that flux is equal to the amount of energy (from photons) collected per unit area of a detector on earth -- the amount of energy collected is proportional to the area of the sky that the object takes up.
 
-Surface brightness is invariant of distance! Flux density and the solid angle both drop off with distance squared ($\omega = A/r^2$).
+Surface brightness is invariant of distance. Flux density and the solid angle both drop off with distance squared ($\Omega = A/r^2$).
 
-\textbf{Terms:}
+\subsection{Useful Derivations / Formulas:}
 
-\begin{itemize}
-\item \textbf{Itensity} ($I$): measured in watts per meters squared per unit steradian. This refers to \textit{total intensity}; sometimes, monochromatic intensity $I_\nu$ is used, which is in units of watts per meters squared per unit steradian per hertz. Formally, $dE = I_{\nu} dA d\nu d\omega dt$. 
-\item \textbf{Flux} ($F$): (technically Flux Density) measured in watts per units squared, this is typically used to represent the amount of energy per unit time from some blackbody that passes through some surface $S$. Formally, $F = \int_S \frac{dE}{dt dA} = \int_S I\cos_{\theta}d\omega$. (the monochromatic version of this integral, i.e. having an additional factor $d\nu$ in the denominator of the first expression, also holds).
-\item \textbf{Luminosity} ($L$): measured in watts. 
-\item \textbf{Energy Density of Radiation} ($u$): measured in J/m$^3$.
-\item \textbf{Surface Brightness} ($S$): see above.
-\end{itemize}
+% \image[2]{images/intensity.png}{6}{images/fluxdistance.png}{6}
+\begin{center}
+    \includegraphics[width=13cm]{images/intensity.png}
+    \includegraphics[width=13cm]{images/fluxdistance.png}
+\end{center}
 
-\textbf{Formulae:}
-
-\image{images/intensity.png}{9}{}{}
-
-The image above depicts a monochromatic intensity (notated as $B_{\lambda}(T)$; we use the $B$ notation to denote the planck function, but $I$ for any general intensity) radiated from a blackbody with temperature $T$, passing through a sheet $dA$. Integrating over each solid angle element $d\omega$, and noting that we only care about the "vertical" perpendicular component (so multiply by $\cos\theta$), we get that, for isotropic radiation:
-
+\textbf{Flux vs. Intensity:}\newline
+The top image depicts a monochromatic intensity element for a blackbody (notated with the planck function $B_{\lambda}(T)$) passing through a sheet $dA$. To calculate the received flux at a distance $r$, given that the blackbody has radius $R$, we can integrate according to the bottom image:
 \begin{align*}
-F &= \int_S I\cos{\theta}d\omega \\
-&= I \int_{0}^{\pi/2}\int_{0}^{2\pi}\cos{\theta}\sin{\theta}\mathrm{d}\phi \mathrm{d}\theta \\
-&= 2\pi I\int_{0}^{\pi / 2}1/2\cdot \sin{2\theta}\mathrm{d}\theta \\
-&= \pi I.
+F_{\nu}d\nu &= \int_S I_{\nu}d\nu\cos{\theta}d\omega \\
+&= I_{\nu}d\nu \int_{\phi = 0}^{2\pi}\int_{\theta = 0}^{\theta_c}\cos{\theta}\sin{\theta}\mathrm{d}\phi \mathrm{d}\theta \\
+&= 2\pi I_{\nu}d\nu\int_{0}^{\theta_c}1/2\cdot \sin{2\theta}\mathrm{d}\theta \\
+&= \pi I_{\nu}d\nu (1-\cos^2{\theta_c}) = \pi I_{\nu}d\nu \sin^2{\theta_c}.
 \end{align*}
 
-Planck functions:
+Assuming that the radiation is uniform across all wavelengths, this implies that $F = \pi I \sin^2\theta_c = \pi I (R/r)^2 \approx I\Omega$ (when given the angular diameter of a faraway object this approximation is usually pretty good). Note that when $r=R$ we have $F = \pi I$.\V
+
+\textbf{Planck Functions:}
 
 \[B_{\lambda}(T) = \frac{2hc^2/\lambda^5}{e^{hc/\lambda kT} - 1}.\]
 \[B_{\nu}(T) = \frac{2h\nu^3/c^2}{e^{h\nu/kT} - 1}.\]
 
-Total intensity:
+Rayleigh Jeans approximation (for $\nu$ small):
+\[B_{\nu}(T) \approx \frac{2\nu^2}{c^2}kT.\]
+
+\textbf{Total intensity:}
 \[I = \int_0^{\infty} B_{\lambda}(T)\mathrm{d}\lambda =  \int_0^{\infty} B_{\nu}(T)\mathrm{d}\nu = F/\pi.\]
 
-Actually performing this integral yields:
+By design, $B_{\lambda}(T)d\lambda = -B_{\nu}(T)d\nu$, where $d\lambda = -c/\nu^2 d\nu$. Performing this integral yields:
 
 \[F = \left(\frac{2\pi^5 k^4}{15c^2 h^3}\right)T^4 = \sigma T^4.\]
 
-Deriving energy density:
-\[dE = IdAd\omega dt = I\cdot \frac{1}{c}d\omega dV \implies u = \int \frac{dE}{dV} = 4\pi/c \cdot I.\]
+\textbf{Energy Density:}
 
-Useful chain of things to remember:
-\[u = \frac{4\pi}{c}I =  \frac{4}{c}F = \frac{4\sigma}{c}T^4 = aT^4.\]
+"Capture energy in a cylindrical trap". 
 
+\begin{center}
+    \includegraphics[width=10cm]{images/energydensity.png}
+\end{center}
+
+\[E_{\nu}d\nu = I_{\nu}d\nu dA\cos{\theta}dtd\Omega = I_{\nu}d\nu dA\cos{\theta}\left(\frac{dL}{c\cdot \cos{\theta}}\right)d\Omega\]
+
+The first $\cos{\theta}$ comes from the fact that energy is diminished because of the angle at which the light enters the trap. However, this is ultimately negated by the fact that the light spends more time inside of the trap by a factor of $1/\cos{\theta}$. 
+
+Now, let $du_{\nu}d\nu$ be a specific energy density element, the first differential with respect to our solid angle. 
+
+\[du_{\nu}d\nu = \frac{E_{\nu}d\nu}{dV} = I_{\nu}d\nu d\Omega \cdot 1/c.\]
+
+Assuming that intensity is the same in every direction, integrating over every solid angle thus gives: 
+\[u_{\nu}d\nu = \frac{4\pi}{c}I_{\nu}d\nu.\]
+
+Finally, integrating over all wavelengths: 
+\[u = \frac{4\pi}{c}\int I_{\nu}d\nu = \frac{4\sigma T^4}{c} = aT^4,\]
+
+where $a \equiv 4\sigma/c$ is the radiation constant.\V
+
+\textbf{Radiation Pressure:}
+
+Let $dp_{\nu}d\nu$ equal the total momentum contained in an incident cone of light to a wall, with solid angle $d\Omega$ (frequencies between $\nu$ and $\nu + d\nu$). Let $dP_{\nu}d_{\nu}$ be the total pressure exerted by this cone of light. Then, 
+\[dp_{\nu}d\nu = \left(\frac{2E_{\nu}\cos{\theta}}{c}\right)d\nu.\]
+
+Thus, 
+
+\[dP_{\nu}d\nu = \frac{dp_{\nu}d\nu/dt}{dA} = I_{\nu}d\nu\cdot \frac{2}{c}\cos^2{\theta}d\Omega.\]
+
+Integrating everything gives $P = u/3$. When not accounting for all incidental angles, the factor of $\cos^2{\theta}$ can be dropped (i.e. just a cone of light incident perpendicular to our wall). Integration in this case leads to $P = u$. The factor of three that is present in the original derivation can be thought of approximately due to the symmetries in each of the three dimensions.
+
+Things can also be framed with respect to the time averaged Poynting vector $\langle S\rangle$. For absorption:
+
+\[F_{\text{rad}} = \frac{\langle S\rangle A}{c}\cos{\theta} \implies P_{\text{rad}} = \frac{\langle S\rangle}{c} = u.\]
+
+For reflection, every of the above quantities is doubled.
+
+\newpage
 \section{Celestial Mechanics}
 
-\[\mu = \frac{m_1m_2}{m_1 + m_2}\]
-\[r_1 = \frac{\mu}{m_1}r, r_2 = \frac{\mu}{m_2}r, v_1 = \frac{\mu}{m_1}v, v_2 = \frac{\mu}{m_2}v.\]
-(all $r$s and $v$s are vectors).
+\textit{References: Carroll Ostlie Chapter 2, Karttunen Chapter 6}
 
-\[E = \frac{1}{2}\mu v^2 - G\frac{M\mu}{r}.\]
-\[L = \mu r\times v = r\times p = \mu\sqrt{GMa(1-e^2)}.\]
+\subsection{Two-body System}
+
+\[\mu = \frac{m_1m_2}{m_1 + m_2}, M = m_1+m_2\]
+\[\mathbf{r_1} = \frac{\mu}{m_1}\mathbf{r}, \mathbf{r_2} = \frac{\mu}{m_2}\mathbf{r}, \mathbf{v_1} = \frac{\mu}{m_1}\mathbf{v}, \mathbf{v_2} = \frac{\mu}{m_2}\mathbf{v}.\]
+
+\textbf{Total Energy:}
+\[E = \frac{1}{2}m_1v_1^2 + \frac{1}{2}m_2v_2^2 - \frac{Gm_1m_2}{r} =  \frac{1}{2}\mu v^2 - G\frac{M\mu}{r}.\]
+
+\textbf{Total Angular Momentum:}
+\[\mathbf{L} = m_1\mathbf{r_1}\times \mathbf{v_1} + m_2\mathbf{r_2}\times\mathbf{v_2} = \mu \mathbf{r}\times \mathbf{v} = \mathbf{r}\times \mathbf{p}.\]
+\[L = \mu\sqrt{GMa(1-e^2)}.\]
+
+\textbf{Other formulas:}
 \[v_p = \sqrt{\frac{GM(1+e)}{a(1-e)}}, v_a = \sqrt{\frac{GM(1-e)}{a(1+e)}}.\]
 \[dA = \frac{1}{2}(r\times dr) = \frac{1}{2}(r\times vdt) = \frac{L}{2\mu}dt.\]
 \[dA = \frac{1}{2}r^2d\theta.\]
-\[dL/dt = (dr/dt\times p) + (r\times dp/dt) = v\times \mu v + r\times F = 0.\]
+\[d\mathbf{L}/dt = (d\mathbf{r}/dt\times \mathbf{p}) + (\mathbf{r}\times d\mathbf{p}/dt) = \mathbf{v}\times \mu \mathbf{v} + \mathbf{r}\times \mathbf{F} = 0.\]
 
-polar form of orbit equation:
+\subsection{Conics}
+
+General polar form of orbital equations: 
 \[r = \frac{p}{1 + e\cos{\theta}}.\]
 
-Circle: $p = r$ (constant radius), $e = 0$. 
-Ellipse: $p = b^2/a = a(1-e^2)$, $0 < e < 1$. \\
-Parabola: $p = r_p$ (perihelion distance), $e=1$. \\
-Hyperbola: $p = b^2/a = a(e^2-1)$, $e > 1$. 
+\begin{itemize}
+    \item Circle: Constant radius, $e=0$.
+    \[r = p.\]
+    \item Ellipse: $p = b^2/a = a(1-e^2)$, $0 < e < 1$.
+    \[r = \frac{a(1-e^2)}{1 + e\cos{\theta}}.\]
+    \item Parabola: $p = 2r_p$, $r_p=$ perihelion distance. $e=1$.
+    \[r = \frac{2r_p}{1+\cos{\theta}}.\]
+    \item Hyperbola: $p = b^2/a = a(e^2-1)$, $e > 1$. 
+    \[r = \frac{a(e^2-1)}{1+e\cos{\theta}}.\]
+\end{itemize}
+
+\newpage
+\section{Atmosphere}
+
+\textit{References: Carroll Ostlie Chapter 9}\V
+
+\textbf{Mean free path} ($\ell$): average distance that molecule travels between collisions. 
+
+\[\ell = \frac{1}{n\sigma} = \frac{1}{\rho \kappa}.\]
+
+\begin{itemize}
+    \item $n = \rho / m$ is the number density of the molecule. For a hydrogen atom, $m = m_h$. 
+    \item $\sigma = \pi(2r)^2$ is the collision cross section. For a hydrogen atom, $r = a_0$ is the Bohr radius. 
+    \item $\rho$ is the mass density of the molecule in the gas.
+    \item $\kappa$ is called the absorption coefficient, also known as opacity. 
+\end{itemize}
+
+The left hand expression can be derived using the cylinder method. If $vt$ represents the total distance travelled by the collision cross section in time $t$, and $vtn\sigma$ represents the total number of stationary particles sweeped by the collision cross section, so dividing the two quantities gives us our desired value for $\ell$.\V
+
+\textbf{Length of random walk} (d): 
+
+Consider a random walk of a photon travelling through a stellar atmosphere with $N$ steps. Then, the net displacement vector is given by: 
+
+\[\mathbf{d} = \sum_{i=1}^N \bm{\ell}_i.\]
+
+To compute the magnitude of $\mathbf{d}$:
+
+\[\mathbf{d}\cdot \mathbf{d} = \sum_{i=1}^{N}\sum_{j=1}^N \bm{\ell}_i\cdot \bm{\ell}_j.\]
+
+This implies
+
+\[d^2 = N\ell^2 + 2\ell^2\sum_{i=1}^{N}\sum_{j=i+1}^{N}\cos{\theta_{ij}}.\]
+
+Over a long period of time, this gives us $d\approx \ell \sqrt{N}$. The number of steps required to get to escape to the surface is then approximately equal to \[N \approx \left(\frac{d_{\text{surface}}}{\ell}\right)^2 = \left(\frac{\tau_{\lambda} \ell}{\ell}\right)^2 = \tau_{\lambda}^2. \]
+
+\V
+
+\textbf{Optical Depth} ($\tau_{\lambda}$): 
+The change in intensity of a light ray as it travels through a vacuum is zero. The change in intensity of a light ray as it travels through a gas is proportional to the density of the gas, $\rho$, the current intensity of the light ray, $I_{\lambda}$, and the distance travelled, $ds$.
+\[dI_{\lambda} = -\kappa_{\lambda}\rho I_{\lambda}ds.\]
+
+Now we define optical depth:
+\[d\tau_{\lambda} = -\kappa_{\lambda}\rho ds,\]
+
+which can be thought of loosely as the number of mean free paths required for a particle to escape the atmosphere, at any given depth. $\tau_{\lambda} = 2/3$ is generally the limit in terms of the depth at which we are able to see into any given atmosphere.
+
+Consider a light ray observed on Earth from an angle $\theta$ from the vertical. Let $\tau_{\lambda, 0}$ be the optical depth from any light ray observed perpendicular to the earth. Then: 
+
+\[d\tau_{\lambda} = -\kappa_{\lambda}\rho ds = -\kappa_{\lambda}\rho dz \sec{\theta} = d\tau_{\lambda, 0}\sec{\theta}.\]
+
+Integrating the opacity equation, we get 
+$I_{\lambda} = I_{\lambda,0}e^{-\tau_{\lambda, 0}\sec{\theta}}$, where $I_{\lambda}$ is the observed intensity, and $I_{\lambda,0}$ is the intensity of the light ray before entering earth's atmosphere.
+
+\newpage
+\section{Thermodynamics}
+
+
+
 
 
 
