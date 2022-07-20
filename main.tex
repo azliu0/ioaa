@@ -569,7 +569,60 @@ Integrating the opacity equation, we get
 $I_{\lambda} = I_{\lambda,0}e^{-\tau_{\lambda, 0}\sec{\theta}}$, where $I_{\lambda}$ is the observed intensity, and $I_{\lambda,0}$ is the intensity of the light ray before entering earth's atmosphere.
 
 \newpage
-\section{Thermodynamics}
+\section{Miscellaneous}
+
+\textbf{Albedo} is a measure of the percentage of light REFLECTED. E.g. $a = 0$ for an object that perfectly absorbs all incoming light, and $a=1$ for a perfectly reflecting surface.
+
+\newpage
+\section{Thermodynamics (brief)}
+\textit{References: Carroll Ostlie Chapter 10}
+
+\newpage
+\section{Data Analysis}
+
+\subsection{Error Propagation}
+
+General formula for any function $f(x,y)$: 
+\[\delta f = \sqrt{\left(\delta x \frac{\partial f}{\partial x}\right)^2 + \left(\delta y \frac{\partial f}{\partial y}\right)^2}\]
+
+Some common useful applications: 
+\begin{itemize}
+\item $f(x,y) = cx \implies \delta f(x,y) = \vert c\vert \delta x$
+\item $f(x,y) = x+y \implies \delta f(x,y) = \sqrt{(\delta x)^2+(\delta y)^2}$
+\item $f(x,y) = xy \implies \displaystyle \frac{\delta f(x,y)}{f(x,y)} = \sqrt{\left(\frac{\delta x}{x}\right)^2 + \left(\frac{\delta y}{y}\right)^2}$
+\item $f(x,y) = kx^n \implies \displaystyle \frac{\delta f(x,y)}{f(x,y)} = \frac{\delta x}{x}\cdot n$
+\item (Distance Modulus) \newline 
+$\displaystyle M = m - 5\log{\left(\frac{d}{10\text{ pc}}\right)} \implies \delta M = \sqrt{(\delta m)^2 + \left(\frac{5}{\ln{10}}\cdot \frac{\delta d}{d}\right)^2}$
+\end{itemize}
+
+\subsection{Least Squares Regression Line}
+
+How to calculate LSQR slope from set of points (without guessing):
+
+We wish to minimize the quantity 
+\[E = \sum (\hat{y}_i- y_i)^2.\]
+
+Plugging in $\hat{y}_i = mx_i+b$, and letting $n$ be the number of points in our sample,
+\begin{align*}
+\sum (mx_i+b-y_i)^2 &= \sum (m^2x_i^2 + b^2 + y_i^2 + 2mbx_i - 2mx_iy_i - 2by_i) \\
+&= m^2 \sum x_i^2 + nb^2 + \sum y_i^2 + 2mb\sum x_i - 2m\sum x_iy_i - 2b\sum y_i.
+\end{align*}
+
+Now set $\partial E/\partial m = 0$ and $\partial E/\partial b = 0$:
+
+\[2m\sum x_i^2 + 2b\sum x_i - 2\sum x_iy_i = 0\]
+\[2nb + 2m\sum x_i - 2\sum y_i = 0\]
+
+Thus, 
+\[b = \frac{1}{n}\left(\sum y_i - m\sum x_i\right) = \overline{y} - m\overline{x}.\]
+\[m = \frac{n\sum x_i y_i - (\sum x_i)(\sum y_i)}{n\sum x_i^2 - (\sum x_i)^2}\]
+
+Formulas from Aniket Sule (+ standard deviation), using the notation $\hat{y} = a+bx$:
+
+\includegraphics[width=7.5cm]{images/lsqr1.png}
+\includegraphics[width=7.5cm]{images/lsqr2.png}
+
+
 
 
 
