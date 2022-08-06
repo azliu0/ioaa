@@ -400,7 +400,30 @@ SB is a measure of flux density per unit solid angle. Typically given in units o
 \[m - \mu = -2.5\log{A}.\]
 Intuitively, $\mu$ is the magnitude of the object when $A = 1\text{arcsec}^2$, so the "$\log{A}$" term just represents the ratio of fluxes in an object with area $A$. Recall that flux is equal to the amount of energy (from photons) collected per unit area of a detector on earth -- the amount of energy collected is proportional to the area of the sky that the object takes up.
 
-Surface brightness is invariant of distance. Flux density and the solid angle both drop off with distance squared ($\Omega = A/r^2$).
+Here is a more formal derivation of the above formula: we start with the literal definition of SB as a measure of the amount of incoming radiation per unit area: 
+\[\mu' \equiv L/(d^2\Omega).\]
+
+This formulation of surface brightness is usually written with the units $L_{\odot}\text{pc}^{-2}$. To convert this to the normal $\mu$ (with units MPSAS):
+\begin{align*}
+m - m_0 = -2.5\log{\left(\frac{F}{F_0}\right)} \\ 
+\mu - \mu_0 = -2.5\log{\left(\frac{F/\Omega}{F_0/\Omega_0}\right)}.
+\end{align*}
+
+Take $\Omega_0 = 1\text{ arcsec}^{2}$. In this case, $m_0 = \mu_0$, since we intuitively want them to be equal for a unit area of the sky. Thus, 
+\[\mu - \mu_0 = m - m_0 + 2.5\log{\Omega}\implies m - \mu = -2.5\log{\Omega}.\]
+
+This derivation also tells us that surface brightness is invariant of distance, since the quantity $F/\Omega$ is invariant of distance (both drop off with $\text{distance}^{-2}$). We can also convert between $\mu'$ and $\mu$: 
+
+\begin{align*}
+\mu - M_{\odot} &= -2.5\log{\left(\frac{L/(d^2\Omega) \cdot 1/(4\pi)}{L_{\odot}/(10\text{ pc})^2\cdot 1/(4\pi)}\right)} \\
+&= -2.5\log{\left(\frac{\mu'}{20626.5^2}\right)},
+\end{align*}
+
+since $\mu'$ is defined with steradians while $\mu$ is defined with arcsec$^2$. Thus,
+
+\[\mu = M_{\odot} + 21.572 - 2.5\log{\mu'}.\]
+
+\[hi\]
 
 \subsection{Useful Derivations / Formulas:}
 
@@ -496,7 +519,7 @@ For reflection, every of the above quantities is doubled. (if ever asked about r
 
 \textbf{Other formulas:}
 \[v_p = \sqrt{\frac{GM(1+e)}{a(1-e)}}, v_a = \sqrt{\frac{GM(1-e)}{a(1+e)}}.\]
-\[dA = \frac{1}{2}(r\times dr) = \frac{1}{2}(r\times vdt) = \frac{L}{2\mu}dt.\]
+\[dA = \frac{1}{2}(r\times dr) = \frac{1}{2}(r\times vdt) = \frac{L}{2\mu}dt\rightarrow \text{can derive third law}.\]
 \[dA = \frac{1}{2}r^2d\theta.\]
 \[d\mathbf{L}/dt = (d\mathbf{r}/dt\times \mathbf{p}) + (\mathbf{r}\times d\mathbf{p}/dt) = \mathbf{v}\times \mu \mathbf{v} + \mathbf{r}\times \mathbf{F} = 0.\]
 
@@ -576,6 +599,49 @@ $I_{\lambda} = I_{\lambda,0}e^{-\tau_{\lambda, 0}\sec{\theta}}$, where $I_{\lamb
 \newpage
 \section{Thermodynamics (brief)}
 \textit{References: Carroll Ostlie Chapter 10}
+
+\textbf{First law: }
+\[dU = dQ - dW\]
+$U$ is the internal energy of the system, $Q$ is the amount of heat \textit{added}. $W$ is the work done \textit{by} the system on its surroundings.
+
+\textbf{Ideal Gas Law:}
+\[PV = nRT = (n\cdot N_A)\left(\frac{R}{N_A}\right)T = NkT.\]
+Alternatively, if we let $\mu = m / m_H$ be the mean molecular weight of the molecule, then 
+\[P = kT \left(\frac{N}{V}\right) = \frac{\rho kT}{\mu m_H}.\]
+So note (appeared once idk):
+\[\frac{k}{\mu m_H} = \frac{nR}{N\cdot \mu m_H} = \frac{nR}{\text{total mass}}.\]
+
+\textbf{Specific Heat:}
+Defined as the amount of heat required to raise the temperature of a unit mass of a material by a unit temperature interval. Units are J / kg$\cdot$K.
+\[C_P = \frac{\partial Q}{\partial T}\Biggr|_P\qquad \text{ and }\qquad C_V = \frac{\partial Q}{\partial T}\Biggr|_V.\]
+$C_P$ denotes the specific heat under constant pressure. $C_V$ denotes the specific heat under constant volume. 
+
+Take everything that follows to be \textit{per unit mass}. For a monatomic gas:
+\[U = (\text{energy / particle})(\text{particle / mass}) = \left(\frac{3}{2}kT\right)\left(\frac{1}{\mu m_H}\right) = \frac{3}{2}nRT.\]
+
+Under constant volume: 
+\begin{align*}
+dU &= dQ - PdV \\
+&= dQ = \left(\frac{\partial Q}{\partial T}\right)\Biggr|_V dT \implies C_V = \frac{3}{2}nR.
+\end{align*}
+
+Under constant pressure: 
+\begin{align*}
+dU &= dQ - PdV \\
+&= dQ - (nRdT - VdP) = C_VdT - nRdT.
+\end{align*}
+
+Thus, $C_P = C_V + nR = \frac{5}{2}nR$. We also let $\gamma = C_P/C_V$, which is equal to $5/3$ for a monatomic gas.
+
+\textbf{Adiabatic Condition:}
+
+An adiabatic process is one without any net change in $Q$. So: 
+\begin{align*}
+dU &= -PdV,
+\end{align*}
+from the first law of thermodynamics, and $PdV + VdP = nRdT = nR\cdot \frac{dU}{C_V}$ from the ideal gas law. Plugging in $nR = C_P - C_V$ and rearranging eventually leads to 
+\[\gamma \frac{dV}{V} = -\frac{dP}{P}.\]
+Integrating gives $PV^{\gamma} = \text{constant}$, which is the adiabatic condition. 
 
 \newpage
 \section{Data Analysis}
